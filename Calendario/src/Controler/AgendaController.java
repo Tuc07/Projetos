@@ -46,10 +46,10 @@ public class AgendaController {
    }
 
    //Cadastro Automatizado
-    public void gerarGradeAuto(){
+    public boolean gerarGradeAuto(){
        if(professoresCadastrados.isEmpty() || turmasCadastrados.isEmpty()){
            System.out.println("Erro: Cadastra pelo menos 1 professor e 1 turma. Tente novamente!");
-           return;
+           return false;
        }
 
        int indexProfessor = 0;
@@ -71,6 +71,7 @@ public class AgendaController {
             }
         }
         System.out.println("Sucesso! Grade da semana preenchida.");
+        return true;
     }
 
    //Exibe a agenda Semanal

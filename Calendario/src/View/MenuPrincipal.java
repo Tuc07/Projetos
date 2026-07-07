@@ -30,8 +30,10 @@ public class MenuPrincipal {
                     new ViewCadasTurma(agendaCtlr).exibirFormulario();
                     break;
                 case 3:
-                    agendaCtlr.gerarGradeAuto();
-                    agendaCtlr.visualizarSemana();
+                    //Só vai rodar se for True
+                    if(agendaCtlr.gerarGradeAuto()) {
+                        agendaCtlr.visualizarSemana();
+                    }
                     break;
                 case 0:
                     System.out.println("Encerrando o sistema...");
