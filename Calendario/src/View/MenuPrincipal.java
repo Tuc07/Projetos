@@ -14,7 +14,6 @@ public class MenuPrincipal {
         int opcao = -1;
         while (opcao != 0) {
             System.out.println("===== Agenda Semanal ====");
-            System.out.println("1 - Visualizar os dias.");
             System.out.println("1 - Visualizar Grade Semanal (Horários).");
             System.out.println("2 - Cadastrar aulas.");
             System.out.println("0 - Sair do Sistema.");
@@ -25,7 +24,6 @@ public class MenuPrincipal {
 
             switch (opcao) {
                 case 1:
-                    agendaCtlr.ConstrutorSemana();
                     agendaCtlr.visualizarSemana();
                     break;
                 case 2:
