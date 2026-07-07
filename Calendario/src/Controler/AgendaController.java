@@ -7,11 +7,24 @@ import java.util.List;
 
 public class AgendaController {
    private List<DiaSemana> semana;
+   private List<Professor> professoresCadastrados;
+   private List<Turma> turmasCadastrados;
 
    public AgendaController(){
        this.semana = new ArrayList<>();
+       this.professoresCadastrados = new ArrayList<>();
+       this.turmasCadastrados = new ArrayList<>();
        inicializarSemana();
    }
+
+   public void salvarProfessor(Professor prof){
+       this.professoresCadastrados.add(prof);
+   }
+
+   public void salvarTurma(Turma turma){
+       this.turmasCadastrados.add(turma);
+   }
+
    //Estrutura de segunda a sexta com slots de 50min
    private void inicializarSemana() {
        String[] diasNomes = {"Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"};
@@ -32,27 +45,39 @@ public class AgendaController {
        }
    }
 
+   //Cadastro Automatizado
+    public void gerarGradeAuto(){
+       if(professoresCadastrados.isEmpty() || turmasCadastrados.isEmpty()){
+           System.out.println("Erro: Cadastra pelo menos 1 professor e 1 turma. Tente novamente!");
+           return;
+       }
+
+       int indexProfessor = 0;
+       int indexTurma = 0;
+
+       // Percorre todos os dias
+        for(DiaSemana dia : semana){
+            //Percorre cada slot
+            for(SlotAula slot: dia.getSlotsHorarios()){
+                Professor profDaVez = professoresCadastrados.get(indexProfessor);
+                Turma turmaDaVez = turmasCadastrados.get(indexTurma);
+
+                //Ocupa o slot combinando a matéria do próprio professor
+                slot.ocuparSlot(profDaVez.materia(), profDaVez, turmaDaVez);
+
+                //Avança para o próximo professor e Turma
+                indexProfessor = (indexProfessor + 1) % professoresCadastrados.size();
+                indexTurma = (indexTurma + 1) % turmasCadastrados.size();
+            }
+        }
+        System.out.println("Sucesso! Grade da semana preenchida.");
+    }
+
    //Exibe a agenda Semanal
     public void visualizarSemana(){
        System.out.println("===== GRADE HORÁRIA DA SEMANA =====");
        for(DiaSemana dia : semana){
            dia.exibirDetalhes();
        }
-    }
-
-   //Metodo para vincular aula
-    public void agendarAula(String nomeDia, LocalTime horarioInicio, String materia, Professor prof, Turma turma) {
-        for (DiaSemana dia : semana) {
-            if (dia.nome.equalsIgnoreCase(nomeDia)) {
-                for (SlotAula slot : dia.getSlotsHorarios()) {
-                    if (slot.getHorarioInicio().equals(horarioInicio)) {
-                        slot.ocuparSlot(materia, prof, turma);
-                        System.out.println("Aula vinculada com sucesso!");
-                        return;
-                    }
-                }
-            }
-        }
-        System.out.println("Erro: Horário Inicial ou dia não encontrado.");
     }
 }
