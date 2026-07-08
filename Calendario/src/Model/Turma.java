@@ -7,11 +7,13 @@ import java.util.List;
 public class Turma{
     private String codigo;
     private Turno turno;
+    private SegmentoEscolar segmento;
     private List<DiaSemana> gradeSemanal;
 
-    public Turma(String codigo, Turno turno){
+    public Turma(String codigo, Turno turno, SegmentoEscolar segmento){
         this.codigo = codigo;
         this.turno = turno;
+        this.segmento = segmento;
         this.gradeSemanal = new ArrayList<>();
         inicializarGradeTurma();
     }
@@ -39,11 +41,12 @@ public class Turma{
 
     public String getCodigo(){return codigo;}
     public Turno getTurno(){return turno;}
+    public SegmentoEscolar getSegmento(){return segmento;}
     public List<DiaSemana> getGradeSemanal(){return gradeSemanal;}
 
     public void exibirGradeCompleta(){
         System.out.println("=================================================");
-        System.out.println("GRADE HORÁRIA DA TURMA: "+ codigo +" ("+turno+") ");
+        System.out.println("GRADE HORÁRIA DA TURMA: "+ codigo +" ("+turno+") - "+segmento);
         System.out.println("=================================================");
         for(DiaSemana dia: gradeSemanal){
             dia.exibirDetalhes();
