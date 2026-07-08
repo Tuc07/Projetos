@@ -7,7 +7,6 @@ public class SlotAula {
     private LocalTime horarioFim;
     private String materia;
     private Professor professor;
-    private Turma turma;
     private boolean ocupado;
 
     public SlotAula(LocalTime horarioInicio, LocalTime horarioFim){
@@ -17,10 +16,9 @@ public class SlotAula {
         this.materia = "Janela Vaga";
     }
 
-    public void ocuparSlot(String materia, Professor professor, Turma turma) {
+    public void ocuparSlot(String materia, Professor professor) {
         this.materia = materia;
         this.professor = professor;
-        this.turma = turma;
         this.ocupado = true;
     }
 
@@ -32,7 +30,7 @@ public class SlotAula {
         if(!ocupado){
             return String.format("[%s - %s] VAGO", horarioInicio, horarioFim);
         }
-        return String.format("[%s - %s] Matéria: %s | Prof: %s | Turma: %s",
-                horarioInicio, horarioFim, materia, professor.nome(), turma.codigo());
+        return String.format("[%s - %s] Matéria: %s | Prof: %s ",
+                horarioInicio, horarioFim, materia, professor.nome());
     }
 }
