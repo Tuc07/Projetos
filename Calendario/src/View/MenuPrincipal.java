@@ -32,7 +32,7 @@ public class MenuPrincipal {
                 case 3:
                     //Só vai rodar se for True
                     if(agendaCtlr.gerarGradeAuto()) {
-                        agendaCtlr.visualizarSemana();
+                        agendaCtlr.visualizarTodasGrades();
                     }
                     break;
                 case 0:
