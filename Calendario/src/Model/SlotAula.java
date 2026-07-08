@@ -22,6 +22,16 @@ public class SlotAula {
         this.ocupado = true;
     }
 
+    public void limparSlot(){
+        this.ocupado = false;
+        this.materia = "Janela Vaga";
+        this.professor = null;
+    }
+
+    public boolean isOcupado() {return ocupado;}
+    public Professor getProfessor() {return professor;}
+
+
     public LocalTime getHorarioInicio() {return horarioInicio;}
     public LocalTime getHorarioFim(){return horarioFim;}
 
@@ -31,6 +41,6 @@ public class SlotAula {
             return String.format("[%s - %s] VAGO", horarioInicio, horarioFim);
         }
         return String.format("[%s - %s] Matéria: %s | Prof: %s ",
-                horarioInicio, horarioFim, materia, professor.nome());
+                horarioInicio, horarioFim, materia, professor.getnome());
     }
 }

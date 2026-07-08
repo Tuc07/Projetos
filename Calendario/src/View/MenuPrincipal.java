@@ -1,13 +1,21 @@
 package View;
 import Controler.AgendaController;
+import Controler.ProfessorController;
+import Controler.TurmaController;
+
 import java.util.Scanner;
 
 public class MenuPrincipal {
     private Scanner scanner = new Scanner(System.in);
     private AgendaController agendaCtlr;
+    private ProfessorController profCtlr;
+    private TurmaController turmaCtlr;
 
-    public MenuPrincipal(AgendaController agendaCtlr){
+
+    public MenuPrincipal(AgendaController agendaCtlr, ProfessorController profCtlr, TurmaController turmaCtlr){
         this.agendaCtlr = agendaCtlr;
+        this.profCtlr = profCtlr;
+        this.turmaCtlr = turmaCtlr;
     }
 
     public void exibirMenu() {
@@ -24,15 +32,15 @@ public class MenuPrincipal {
 
             switch (opcao) {
                 case 1:
-                    new ViewCadasProf(agendaCtlr).exibirFormulario();
+                    new ViewCadasProf(profCtlr).exibirFormulario();
                     break;
                 case 2:
-                    new ViewCadasTurma(agendaCtlr).exibirFormulario();
+                    new ViewCadasTurma(turmaCtlr).exibirFormulario();
                     break;
                 case 3:
                     //Só vai rodar se for True
                     if(agendaCtlr.gerarGradeAuto()) {
-                        agendaCtlr.visualizarTodasGrades();
+                        turmaCtlr.visualizarGrades();
                     }
                     break;
                 case 0:
